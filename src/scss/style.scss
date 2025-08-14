@@ -1,0 +1,8 @@
+/* Base */
+@use './base/reset';
+@use './base/root';
+@forward './base/fontsAutoGen';
+@forward './base/base';
+
+/* No styles code below. Only in modules */
+/* Не пишіть CSS код ниже. Только в подключаемых файлах */
