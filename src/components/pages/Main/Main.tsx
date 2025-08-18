@@ -1,116 +1,50 @@
 import * as s from './Main.module.scss'
-import React, {useEffect, useState} from "react";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchGoverlaRates } from "@/api/goverla";
 
 // Type
 interface Props {
-
 }
-interface CurrencyRate {
-  currencyCodeA: number;
-  currencyCodeB: number;
-  rateBuy?: number;
-  rateSell?: number;
-  rateCross?: number;
-}
-
-const currencyMap: { [key: string]: number } = {
-  USD: 840,
-  EUR: 978,
-  GBP: 826,
-  PLN: 985,
-};
 
 // Main
 const Main: React.FC<Props> = (props) => {
-  // const {} = props
-  //
-  // return (
-  //   <div className={s.Main}>
-  //     {/*<h1>Курс валют</h1>*/}
-  //     {/*<h2>Для клієнтів -</h2>*/}
-  //     {/*<h2>Для менеджера -</h2>*/}
-  //
-  //   </div>
-  // )
-  const [minRate, setMinRate] = useState<number | null>(null);
-  const [maxRate, setMaxRate] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [currency, setCurrency] = useState<"USD" | "EUR" | "GBP" | "PLN">("USD");
-  const [error, setError] = useState<string | null>(null);
+  const { data: rates, isLoading, isError } = useQuery({
+    queryKey: ["goverlaRates"],
+    queryFn: fetchGoverlaRates,
+    refetchInterval: 60000, // автооновлення раз на хвилину
+  });
 
-  const fetchRates = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("https://api.monobank.ua/bank/currency");
-      const data: any = await res.json();
-
-      if (!Array.isArray(data)) {
-        setError("Помилка API або перевищено ліміт запитів (429)");
-        return;
-      }
-
-      const code = currencyMap[currency];
-      const filtered = data.filter(
-        (item: CurrencyRate) => item.currencyCodeA === code && item.currencyCodeB === 980
-      );
-
-      if (filtered.length > 0) {
-        const rates = filtered
-          .map((item) => {
-            if (item.rateBuy && item.rateSell) return [item.rateBuy, item.rateSell];
-            if (item.rateCross) return [item.rateCross];
-            return [];
-          })
-          .flat();
-
-        setMinRate(Math.min(...rates));
-        setMaxRate(Math.max(...rates));
-      } else {
-        setMinRate(null);
-        setMaxRate(null);
-        setError("Дані не знайдено для цієї валюти");
-      }
-    } catch (err) {
-      console.error("Помилка при завантаженні:", err);
-      setError("Помилка при завантаженні даних");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Не викликаємо useEffect автоматично, щоб не спамити API
-  // useEffect(() => { fetchRates(); }, [currency]);
+  if (isLoading) return <p>Завантаження...</p>;
+  if (isError) return <p>Помилка при отриманні даних</p>;
 
   return (
-    <div style={{ fontFamily: "Arial", padding: "20px" }}>
-      <h2>Курс {currency} у Monobank</h2>
-
-      <select
-        value={currency}
-        onChange={(e) => setCurrency(e.target.value as any)}
-        style={{ marginBottom: "10px" }}
-      >
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="GBP">GBP</option>
-        <option value="PLN">PLN</option>
-      </select>
-
-      <br />
-
-      <button onClick={fetchRates} disabled={loading}>
-        {loading ? "Завантаження..." : "Оновити курс"}
-      </button>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {minRate !== null && maxRate !== null && !error && (
-        <div>
-          <p>Найнижчий курс: <b>{minRate}</b></p>
-          <p>Найвищий курс: <b>{maxRate}</b></p>
-        </div>
-      )}
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Курси валют Goverla</h2>
+      <table className="table-auto border-collapse border border-gray-300">
+        <thead>
+        <tr>
+          <th className="border px-4 py-2">Валюта</th>
+          <th className="border px-4 py-2">Купівля</th>
+          <th className="border px-4 py-2">Продаж</th>
+          <th className="border px-4 py-2">Оновлено</th>
+        </tr>
+        </thead>
+        <tbody>
+        {rates?.map((rate) => (
+          <tr key={rate.id}>
+            <td className="border px-4 py-2">
+              {rate.currency.codeAlpha} ({rate.currency.name})
+            </td>
+            <td className="border px-4 py-2">{rate.bid.absolute}</td>
+            <td className="border px-4 py-2">{rate.ask.absolute}</td>
+            <td className="border px-4 py-2">
+              {new Date(rate.bid.updatedAt).toLocaleString("uk-UA")}
+            </td>
+          </tr>
+        ))}
+        </tbody>
+      </table>
     </div>
   );
 }
