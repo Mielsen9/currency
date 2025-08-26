@@ -1,0 +1,19 @@
+// Maket
+$maxWidth: 1980;
+$maxWidthContainer: 1440;  
+$minWidth: 320;
+
+$laptop-size: 1199px;
+$tablet-size: 768px;
+$mobile-size: 490px;
+
+// Colors
+
+// Mq
+$breakpoints: (
+  "mobile": 490px,
+  "tablet": 768px,
+  "mtablet": 850px,
+  "mlaptop": 1024px,
+  "laptop": 1199px,
+  );
