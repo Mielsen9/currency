@@ -14,7 +14,6 @@ const RatesPage: React.FC = () => {
   return (
     <div className={s.Main}>
       <Header />
-      <h2>Курси валют</h2>
       {rates && <RatesList rates={rates} />}
       <Footer/>
     </div>
