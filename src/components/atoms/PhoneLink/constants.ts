@@ -1,0 +1,1 @@
+export const PHONE_LINK: string = "tel:+380733965459";

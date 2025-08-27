@@ -1,4 +1,6 @@
 import * as s from './ContactLinks.module.scss'
+import PhoneLink from "@/components/atoms/PhoneLink";
+import TelegramLink from "@/components/atoms/TelegramLink";
 
 // Type
 interface Props {
@@ -11,7 +13,8 @@ const ContactLinks: React.FC<Props> = (props) => {
 
   return (
     <div className={s.ContactLinks}>
-      ContactLinks
+      <TelegramLink/>
+      <PhoneLink />
     </div>
   )
 }

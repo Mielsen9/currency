@@ -1,5 +1,5 @@
 import * as s from './TelegramLink.module.scss'
-
+import TelegramSVG from "@/asset/images/svgicons/telegram.svg";
 // Type
 interface Props {
 
@@ -11,7 +11,11 @@ const TelegramLink: React.FC<Props> = (props) => {
 
   return (
     <div className={s.TelegramLink}>
-      TelegramLink
+      <TelegramSVG width={32} height={32} />
+      <a href="https://t.me/Petro_Zvir"
+         target="_blank"
+      >Написати у Telegram.
+      </a>
     </div>
   )
 }
