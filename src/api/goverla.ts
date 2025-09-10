@@ -20,6 +20,12 @@ export type Rate = {
   };
 };
 
+export type Point = {
+  id: string;
+  rates: Rate[];
+  updatedAt: string;
+};
+
 export const goverlaApi = createApi({
   reducerPath: "goverlaApi",
   baseQuery: fetchBaseQuery({
@@ -30,7 +36,7 @@ export const goverlaApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getRates: builder.query<Rate[], void>({
+    getRates: builder.query<Point, void>({
       query: (): any => ({
         method: "POST",
         body: JSON.stringify({
@@ -38,8 +44,8 @@ export const goverlaApi = createApi({
           variables: { alias: "goverla-ua" },
         }),
       }),
-      transformResponse: (response: { data: { point: { rates: Rate[] } } }) =>
-        response.data.point.rates,
+      transformResponse: (response: { data: { point: Point} }) =>
+        response.data.point,
     }),
   }),
 });

@@ -1,6 +1,7 @@
 export const GET_RATES = `
   query Point($alias: Alias!) {
     point(alias: $alias) {
+      id
       rates {
         id
         currency {
@@ -17,6 +18,7 @@ export const GET_RATES = `
           updatedAt
         }
       }
+      updatedAt
     }
   }
 `;

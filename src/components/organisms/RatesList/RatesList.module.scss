@@ -1,5 +1,13 @@
 .RatesList {
-  width: 33%;
-  height: 962px;
+  width: 40%;
+  height: auto;
   margin: 0 20px;
+
+  background: #292e33;
+  border: 1px solid #394047;
+  border-radius: 12px;
+
+  min-width: 480px;
+  display: flex;
+  flex-direction: column;
 }

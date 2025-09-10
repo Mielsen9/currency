@@ -1,6 +1,15 @@
+@use "@/scss/utils/containers" as *;
+
 .Main {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background-color: #1a1c1e;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.RatesContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
