@@ -18,7 +18,7 @@ const RatesPage: React.FC = () => {
         <Header />
         <section className={s.RatesContainer}>
           {point && <RatesList point={point} />}
-          <CurrencyCalculator/>
+          {point && <CurrencyCalculator rates={point?.rates} />}
         </section>
         <Footer/>
       </div>
