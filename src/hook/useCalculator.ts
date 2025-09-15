@@ -4,10 +4,9 @@
  */
 import { useState, useCallback } from "react";
 import formatCurrency from "@/shared/utils/formatCurrency";
+import {Calculator} from "@/features/calculator/Calculator";
 
-export const useCalculator = (initialValue = 0) => {
-  /** Поточне значення введене користувачем */
-  const [value, setValue] = useState<number>(initialValue);
+export const useCalculator = () => {
 
   /** Відформатований результат */
   const [result, setResult] = useState<string>("0.00");
@@ -17,17 +16,16 @@ export const useCalculator = (initialValue = 0) => {
    * @param val - введене число користувачем
    * @param rate - курс валюти з API (може бути в копійках)
    */
-  const handleChange = useCallback((val: number, rate: number) => {
-    const normalizedValue = Number(val);
+  const handleChange = useCallback((value: string, rate: number) => {
+    const calc = new Calculator();
 
-    const formatted = formatCurrency(normalizedValue * rate, {
+    const formatted = formatCurrency(calc.calculate(value, rate), {
       isCents: true, // rate у копійках
       fractionDigits: 2,
     });
 
-    setValue(normalizedValue);
     setResult(formatted);
   }, []);
 
-  return { value, result, handleChange };
+  return {result, handleChange };
 };

@@ -1,12 +1,20 @@
+@use "@/scss/utils/function" as *;
+@use "@/scss/utils/mixins" as *;
+
 .TelegramLink {
   color: rgb(86, 96, 107);
   margin-left: 8px;
-  font-size: 16px;
+  font-size: fun-adaptiv-rem(16, 10);
   font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.TelegramLink a {
+.TelegramLink p {
   margin-left: 10px;
+}
+@include tablet {
+  .TelegramLink p {
+    display: none;
+  }
 }

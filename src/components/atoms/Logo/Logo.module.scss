@@ -1,7 +1,11 @@
+@use "@/scss/utils/function" as *;
+
 .Logo {
   color: red;
-  display: block;
   height: 50px;
   font-weight: bold;
-  font-size: 30px;
+  font-size: fun-adaptiv-rem(30, 16);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

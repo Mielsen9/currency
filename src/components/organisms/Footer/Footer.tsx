@@ -17,7 +17,7 @@ const Footer: React.FC<Props> = (props) => {
         <p>© 2023-2024</p>
         <p>Усі права застережені.</p>
       </div>
-      <p>Currency Calculator</p>
+      <p className={s.noneForMobile}>Currency Calculator</p>
     </h5>
   )
 }

@@ -1,5 +1,5 @@
 import * as s from './CurrencySelector.module.scss'
-import { FC } from "react";
+import {FC, memo} from "react";
 
 interface CurrencySelectorProps {
   rate: number;
@@ -7,7 +7,7 @@ interface CurrencySelectorProps {
   options: { label: string; value: number }[];
 }
 
-const CurrencySelector: FC<CurrencySelectorProps> = ({ rate, onChange, options }) => {
+const CurrencySelector: FC<CurrencySelectorProps> = memo(({ rate, onChange, options }) => {
   return (
     <select
       className={s.CurrencySelector}
@@ -20,6 +20,6 @@ const CurrencySelector: FC<CurrencySelectorProps> = ({ rate, onChange, options }
       ))}
     </select>
   );
-};
+});
 
 export default CurrencySelector;

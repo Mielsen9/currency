@@ -11,9 +11,9 @@ interface FormatCurrencyOptions {
 }
 
 function formatCurrency(
-  value: number | string,
-  options: FormatCurrencyOptions = {}
-): string {
+                          value: number | string,
+                          options: FormatCurrencyOptions = {} ): string {
+
   const { isCents = false, fractionDigits = 2 } = options;
 
   // Перетворюємо рядок у число, прибираємо пробіли та замінюємо кому на крапку
@@ -29,7 +29,7 @@ function formatCurrency(
   }
 
   // Форматування числа з точкою як десятковим роздільником
-  return num.toLocaleString('en-US', {
+  return num.toLocaleString("uk-UA", {
     minimumFractionDigits: fractionDigits,
     maximumFractionDigits: fractionDigits,
   });

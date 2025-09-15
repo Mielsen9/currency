@@ -15,12 +15,18 @@ const RatesPage: React.FC = () => {
   return (
     <div className={s.Main}>
       <div className={s.wrapper}>
-        <Header />
-        <section className={s.RatesContainer}>
-          {point && <RatesList point={point} />}
-          {point && <CurrencyCalculator rates={point?.rates} />}
-        </section>
-        <Footer/>
+        <div className={s.MainContainer}>
+          <section className={s.HeaderContainer}>
+            <Header />
+          </section>
+          <section className={s.ContentContainer}>
+            {point && <RatesList point={point} />}
+            {point && <CurrencyCalculator rates={point?.rates} />}
+          </section>
+          <section className={s.FooterContainer}>
+            <Footer/>
+          </section>
+        </div>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const RatesList: React.FC<Props> = (props) => {
       <RateCaption point={point} />
       <RateHeader/>
       <ul>
-        {point.rates.map((rate) => (
+        {point.rates.slice(0, 5).map((rate) => (
           <RateItem key={rate.id} rate={rate} />
         ))}
       </ul>

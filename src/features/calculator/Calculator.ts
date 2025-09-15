@@ -12,8 +12,8 @@ export class Calculator {
    * const calc = new Calculator();
    * calc.calculate(100, 3750) // 3750.00
    */
-  public calculate(value: number, rate: number): number {
+  public calculate(value: number | string, rate: number): number {
     const normalizedValue = Number(value);
-    return (normalizedValue * rate) / 100; // копійки → гривні
+    return (normalizedValue * rate);
   }
 }

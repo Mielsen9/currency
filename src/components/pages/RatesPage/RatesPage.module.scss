@@ -1,15 +1,41 @@
 @use "@/scss/utils/containers" as *;
+@use "@/scss/utils/mixins" as *;
+@use "@/scss/utils/function" as *;
 
 .Main {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-color: #1a1c1e;
+  display: flex;
+}
+.MainContainer {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.RatesContainer {
+.HeaderContainer {
+  padding-left: fun-adaptiv-rem(80, 10);
+  padding-right: fun-adaptiv-rem(80, 10);
+  margin-bottom: fun-adaptiv-rem(25, 0);
+}
+.FooterContainer {
+  padding-left: fun-adaptiv-rem(80, 10);
+  padding-right: fun-adaptiv-rem(80, 10);
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.ContentContainer {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+@include laptop {
+  .Main {
+    height: 100%;
+  }
+  .ContentContainer {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
 }

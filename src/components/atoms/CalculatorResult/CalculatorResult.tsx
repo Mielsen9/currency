@@ -1,4 +1,5 @@
 import * as s from './CalculatorResult.module.scss'
+import {memo} from "react";
 
 // Type
 interface Props {
@@ -6,7 +7,7 @@ interface Props {
 }
 
 // CalculatorResult
-const CalculatorResult: React.FC<Props> = (props) => {
+const CalculatorResult: React.FC<Props> = memo((props) => {
   const {result} = props
 
   return (
@@ -14,6 +15,6 @@ const CalculatorResult: React.FC<Props> = (props) => {
       <p>{result}</p>
     </div>
   )
-}
+});
 
 export default CalculatorResult

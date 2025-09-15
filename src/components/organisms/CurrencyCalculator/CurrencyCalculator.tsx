@@ -2,20 +2,21 @@ import * as s from './CurrencyCalculator.module.scss'
 import CalculatorInput from "@/components/atoms/CalculatorInput";
 import CalculatorResult from "@/components/atoms/CalculatorResult";
 import {useCalculator} from "@/hook/useCalculator";
-import {useEffect, useState} from "react";
+import {FC, useCallback, useEffect, useMemo, useState} from "react";
 import CurrencySelector from "@/components/atoms/CurrencySelector";
 import {Rate} from "@/types";
 
 // Type
-interface Props {
+interface CurrencyCalculatorProps {
   rates: Rate[]
 }
 
 // CurrencyCalculator
-const CurrencyCalculator: React.FC<Props> = (props) => {
+const CurrencyCalculator: FC<CurrencyCalculatorProps> = (props) => {
   const {rates} = props
+  const [inputValue, setInputValue] = useState<string>("");
   const [rate, setRate] = useState<number>(0);
-  const { value, result, handleChange } = useCalculator(0);
+  const {result, handleChange } = useCalculator();
 
   // встановлюємо перший курс за замовчуванням
   useEffect(() => {
@@ -24,28 +25,39 @@ const CurrencyCalculator: React.FC<Props> = (props) => {
     }
   }, [rates, rate]);
 
-  // 🔥 перерахунок при зміні курсу
+  //  перерахунок при зміні курсу
   useEffect(() => {
     if (rate > 0) {
-      handleChange(value, rate);
+      handleChange(inputValue, rate);
     }
-  }, [rate, value, handleChange]);
+  }, [rate, inputValue, handleChange]);
+
+  const handleInputChange = useCallback((value: string) => {
+    handleChange(value, rate);
+    setInputValue(value);
+  },[inputValue])
+
+  const optionsCurrencySelector = useMemo(
+    () =>
+      rates.map((r) => ({
+        label: r.currency.codeAlpha,
+        value: Number(r.bid.absolute),
+      })),
+    [rates]
+  );
 
   return (
     <div className={s.CurrencyCalculator}>
       <h1 className={s.title}>Ведіть суму для розрахунку</h1>
       <div className={s.ContainerInput}>
         <CalculatorInput
-          value={value}
-          onChange={(val) => handleChange(val, rate)}
+          value={inputValue}
+          onChange={handleInputChange}
         />
         <CurrencySelector
           rate={rate}
           onChange={setRate}
-          options={rates.map((r) => ({
-            label: r.currency.codeAlpha,
-            value: Number(r.bid.absolute),
-          }))}
+          options={optionsCurrencySelector}
         />
       </div>
       <h2 className={s.title}>Результат</h2>

@@ -1,7 +1,9 @@
+@use "@/scss/utils/function" as *;
+
 .CurrencyCalculator {
   color: white;
   width: 40%;
-  height: 50vh;
+  height: 100%;
   margin: 0 20px;
 
   background: #292e33;
@@ -9,7 +11,7 @@
   border-radius: 12px;
   box-sizing: border-box;
 
-  min-width: 480px;
+  min-width: 320px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -19,9 +21,10 @@
   padding: 20px;
 }
 .title {
-  font-size: 32px;
+  font-size: fun-adaptiv-rem(32, 16);
   font-weight: 900;
   color: white;
+  text-align: center;
 }
 .ContainerInput {
   display: flex;

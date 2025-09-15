@@ -12,12 +12,11 @@ const PhoneLink: React.FC<Props> = (props) => {
   const {} = props
 
   return (
-    <div className={s.PhoneLink}>
+    <a href= {PHONE_LINK}
+       className={s.PhoneLink}>
       <PhoneSVG width={32} height={32} />
-      <a href= {PHONE_LINK} >
-        +(380) 733-965-459
-      </a>
-    </div>
+      <p>+(380) 733-965-459</p>
+    </a>
   )
 }
 

@@ -1,12 +1,20 @@
+@use "@/scss/utils/function" as *;
+@use "@/scss/utils/mixins" as *;
+
 .PhoneLink {
   color: rgb(86, 96, 107);
   margin-left: 8px;
-  font-size: 16px;
+  font-size: fun-adaptiv-rem(16, 10);
   font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.PhoneLink a {
+.PhoneLink p {
   margin-left: 10px;
+}
+@include tablet {
+  .PhoneLink p {
+    display: none;
+  }
 }
