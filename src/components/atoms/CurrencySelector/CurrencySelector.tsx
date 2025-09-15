@@ -13,7 +13,7 @@ const CurrencySelector: FC<CurrencySelectorProps> = memo(({ rate, onChange, opti
       className={s.CurrencySelector}
       value={rate}
       onChange={(e) => onChange(Number(e.target.value))}>
-      {options.map((opt) => (
+      {options.slice(0,5).map((opt) => (
         <option key={opt.value} value={opt.value}>
           {opt.label}
         </option>
