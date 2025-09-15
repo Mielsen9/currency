@@ -1,5 +1,6 @@
 import * as s from './RateCaption.module.scss'
-import {Point} from "@/api/goverla";
+import {Point} from "@/types";
+
 
 // Type
 interface Props {

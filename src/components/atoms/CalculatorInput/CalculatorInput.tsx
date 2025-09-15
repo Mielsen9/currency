@@ -1,32 +1,37 @@
-import * as s from './CalculatorInput.module.scss'
-import {ChangeEvent, useState} from "react";
+/**
+ * Компонент інпуту для калькулятора.
+ * Використовує react-currency-input-field для відображення валют з форматуванням.
+ */
+import { FC } from "react";
+import CurrencyInput from "react-currency-input-field";
+import * as s from "./CalculatorInput.module.scss";
 
-// Type
 interface CalculatorInputProps {
+  /** Значення інпуту */
   value: number;
+  /** Функція для оновлення значення */
   onChange: (value: number) => void;
+  /** Символ валюти, який показується перед числом */
+  currencySymbol?: string;
 }
 
-// CalculatorInput
-const CalculatorInput: React.FC<CalculatorInputProps> = (props) => {
-  const {value, onChange} = props
-
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(e.target.value);
-    onChange(newValue);
-  };
+const CalculatorInput: FC<CalculatorInputProps> = ({
+                                                     value,
+                                                     onChange,
+                                                     currencySymbol = "₴",
+                                                   }) => {
   return (
-    <input
-      className={s.CalculatorInput}
-      type="number"
-      value={isFocused && value === 0 ? "" : value}
-      onChange={handleChange}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
+    <CurrencyInput
+      value={value}
+      decimalsLimit={2}
+      decimalSeparator="."
+      groupSeparator=" "
+      placeholder="0.00"
+      prefix={currencySymbol + " "}
+      onValueChange={(val: any) => onChange(Number(val))}
+      className={s.input}
     />
-  )
-}
+  );
+};
 
-export default CalculatorInput
+export default CalculatorInput;

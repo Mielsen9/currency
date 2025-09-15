@@ -1,5 +1,5 @@
 import React from "react";
-import { useRates } from "@/features/rates/hook/useRates";
+import { useRates } from "@/hook/useRates";
 import RatesList from "@/components/organisms/RatesList";
 import * as s from "./RatesPage.module.scss";
 import Header from "@/components/organisms/Header";

@@ -1,4 +1,5 @@
-import {Point, useGetRatesQuery} from "@/api/goverla";
+import {useGetRatesQuery} from "@/api/goverla";
+import {Point} from "@/types";
 
 export const useRates = () => {
   const { data, error, isLoading } = useGetRatesQuery();

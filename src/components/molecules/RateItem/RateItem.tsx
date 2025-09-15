@@ -1,7 +1,7 @@
 import * as s from './RateItem.module.scss'
-import type { Rate } from "@/api/goverla";
 import Flag from "@/components/atoms/Flag";
 import formatCurrency from "@/shared/utils/formatCurrency";
+import {Rate} from "@/types";
 
 // Type
 interface Props {

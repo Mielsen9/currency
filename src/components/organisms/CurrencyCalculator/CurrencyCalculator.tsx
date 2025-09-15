@@ -1,10 +1,10 @@
 import * as s from './CurrencyCalculator.module.scss'
 import CalculatorInput from "@/components/atoms/CalculatorInput";
 import CalculatorResult from "@/components/atoms/CalculatorResult";
-import {useCalculator} from "@/features/CurrencyCalculatorLogic/useCalculator";
-import {Rate} from "@/api/goverla";
+import {useCalculator} from "@/hook/useCalculator";
 import {useEffect, useState} from "react";
 import CurrencySelector from "@/components/atoms/CurrencySelector";
+import {Rate} from "@/types";
 
 // Type
 interface Props {

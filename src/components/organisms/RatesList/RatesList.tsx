@@ -1,9 +1,9 @@
 import * as s from './RatesList.module.scss'
 import React from "react";
-import type {Point} from "@/api/goverla";
 import RateItem from "@/components/molecules/RateItem";
 import RateCaption from "@/components/molecules/RateCaption";
 import RateHeader from "@/components/molecules/RateHeader";
+import {Point} from "@/types";
 
 // Type
 interface Props {

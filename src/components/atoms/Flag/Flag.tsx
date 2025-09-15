@@ -1,5 +1,5 @@
 import * as s from './Flag.module.scss'
-import {Rate} from "@/api/goverla";
+import {Rate} from "@/types";
 
 // Type
 interface Props {

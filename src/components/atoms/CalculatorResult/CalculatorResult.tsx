@@ -2,7 +2,7 @@ import * as s from './CalculatorResult.module.scss'
 
 // Type
 interface Props {
-  result: number
+  result: string
 }
 
 // CalculatorResult
